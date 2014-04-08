@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="WP8TwosUnlimited.GameTileControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="40" d:DesignWidth="40">
+
+    <Viewbox Name="viewBox"
+             Width="0"
+             Height="0">
+        <Border Name="border"
+                Background="#eee4da"
+                CornerRadius="2">
+            <TextBlock Name="textBlock"
+                       Foreground="#776e65"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" />
+        </Border>
+    </Viewbox>
+</UserControl>
