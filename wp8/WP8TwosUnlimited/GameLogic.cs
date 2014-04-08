@@ -44,14 +44,14 @@ namespace WP8TwosUnlimited
                 }
             }
 
-            for (int i = 0; i < GetRotation(move); i++)
+            for (int i = 0; i < 4 - GetRotation(move); i++)
             {
                 foreach (GameTile tile in oldTileStates.Keys.ToList())
                 {
-                    oldTileStates[tile] = RotateCounterClockwise(oldTileStates[tile], board.GetLength(0));
+                    oldTileStates[tile] = RotateClockwise(oldTileStates[tile], board.GetLength(0));
                 }
 
-                board = RotateCounterClockwise(board);
+                board = RotateClockwise(board);
             }
 
             return GetGameState(board, oldTileStates);
@@ -143,14 +143,9 @@ namespace WP8TwosUnlimited
             return rotated;
         }
 
-        private static PoweredTile[,] RotateCounterClockwise(PoweredTile[,] board)
+        private static GameTileState RotateClockwise(GameTileState tileState, int size)
         {
-            return RotateClockwise(RotateClockwise(RotateClockwise(board)));
-        }
-
-        private static GameTileState RotateCounterClockwise(GameTileState tileState, int size)
-        {
-            return new GameTileState(tileState.GetPower(), tileState.GetColumn(), size - 1 - tileState.GetRow());
+            return new GameTileState(tileState.GetPower(), size - 1 - tileState.GetColumn(), tileState.GetRow());
         }
 
         private static bool FloatTiles(PoweredTile[,] board, Dictionary<GameTile, GameTileState> oldTileStates)
