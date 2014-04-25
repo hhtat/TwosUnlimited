@@ -35,7 +35,7 @@ namespace WP8TwosUnlimited
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            update(gameState);
+            update(gameState, new Dictionary<GameTile, GameTileState>());
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(10);
@@ -49,7 +49,16 @@ namespace WP8TwosUnlimited
             timer = null;
         }
 
-        private void update(GameState state)
+        private void move(GameMove move)
+        {
+            IDictionary<GameTile, GameTileState> oldTileStates;
+
+            gameState = GameLogic.Step(gameState, move, out oldTileStates);
+
+            update(gameState, oldTileStates);
+        }
+
+        private void update(GameState state, IDictionary<GameTile, GameTileState> oldTileStates)
         {
             canvas.Children.Clear();
 
@@ -88,7 +97,7 @@ namespace WP8TwosUnlimited
                 tileControls.Remove(tile);
                 oldTileControls[tile] = tileControl;
 
-                tileControl.Update(state.GetOldTileState(tile));
+                tileControl.Update(oldTileStates[tile]);
 
                 canvas.Children.Add(tileControl);
             }
@@ -134,15 +143,11 @@ namespace WP8TwosUnlimited
 
             if (Math.Abs(y) > Math.Abs(x) && Math.Abs(y) > SwipeDelta)
             {
-                gameState = GameLogic.Step(gameState, y < 0.0 ? GameMove.Up : GameMove.Down);
-
-                update(gameState);
+                move(y < 0.0 ? GameMove.Up : GameMove.Down);
             }
             else if (Math.Abs(x) > SwipeDelta)
             {
-                gameState = GameLogic.Step(gameState, x < 0.0 ? GameMove.Left : GameMove.Right);
-
-                update(gameState);
+                move(x < 0.0 ? GameMove.Left : GameMove.Right);
             }
         }
     }

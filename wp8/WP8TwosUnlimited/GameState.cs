@@ -9,14 +9,12 @@ namespace WP8TwosUnlimited
         private readonly int size;
 
         private IReadOnlyDictionary<GameTile, GameTileState> tileStates;
-        private IReadOnlyDictionary<GameTile, GameTileState> oldTileStates;
 
-        public GameState(int size, IDictionary<GameTile, GameTileState> tileStates, IDictionary<GameTile, GameTileState> oldTileStates)
+        public GameState(int size, IDictionary<GameTile, GameTileState> tileStates)
         {
             this.size = size;
 
             this.tileStates = new ReadOnlyDictionary<GameTile, GameTileState>(new Dictionary<GameTile, GameTileState>(tileStates));
-            this.oldTileStates = new ReadOnlyDictionary<GameTile, GameTileState>(new Dictionary<GameTile, GameTileState>(oldTileStates));
         }
 
         public int GetSize()
@@ -32,11 +30,6 @@ namespace WP8TwosUnlimited
         public GameTileState GetTileState(GameTile tile)
         {
             return tileStates[tile];
-        }
-
-        public GameTileState GetOldTileState(GameTile tile)
-        {
-            return oldTileStates[tile];
         }
 
         public IEnumerator<GameTile> GetEnumerator()

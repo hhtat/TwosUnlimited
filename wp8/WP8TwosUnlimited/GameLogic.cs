@@ -13,10 +13,10 @@ namespace WP8TwosUnlimited
             SpawnTile(board);
             SpawnTile(board);
 
-            return GetGameState(board, new Dictionary<GameTile, GameTileState>());
+            return GetGameState(board);
         }
 
-        public static GameState Step(GameState state, GameMove move)
+        public static GameState Step(GameState state, GameMove move, out IDictionary<GameTile, GameTileState> oldTileStates)
         {
             PoweredTile[,] board = GetBoard(state);
 
@@ -27,7 +27,7 @@ namespace WP8TwosUnlimited
 
             int highestPower = GetHighestPower(board);
 
-            Dictionary<GameTile, GameTileState> oldTileStates = new Dictionary<GameTile, GameTileState>();
+            oldTileStates = new Dictionary<GameTile, GameTileState>();
 
             if (FloatTiles(board, oldTileStates))
             {
@@ -54,7 +54,7 @@ namespace WP8TwosUnlimited
                 board = RotateClockwise(board);
             }
 
-            return GetGameState(board, oldTileStates);
+            return GetGameState(board);
         }
 
         private static int GetHighestPower(PoweredTile[,] board)
@@ -91,7 +91,7 @@ namespace WP8TwosUnlimited
             return board;
         }
 
-        private static GameState GetGameState(PoweredTile[,] board, Dictionary<GameTile, GameTileState> oldTileStates)
+        private static GameState GetGameState(PoweredTile[,] board)
         {
             Dictionary<GameTile, GameTileState> tileStates = new Dictionary<GameTile, GameTileState>();
 
@@ -108,7 +108,7 @@ namespace WP8TwosUnlimited
                 }
             }
 
-            return new GameState(board.GetLength(0), tileStates, oldTileStates);
+            return new GameState(board.GetLength(0), tileStates);
         }
 
         private static int GetRotation(GameMove move)
@@ -148,7 +148,7 @@ namespace WP8TwosUnlimited
             return new GameTileState(tileState.GetPower(), size - 1 - tileState.GetColumn(), tileState.GetRow());
         }
 
-        private static bool FloatTiles(PoweredTile[,] board, Dictionary<GameTile, GameTileState> oldTileStates)
+        private static bool FloatTiles(PoweredTile[,] board, IDictionary<GameTile, GameTileState> oldTileStates)
         {
             bool floated = false;
 
