@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace WP8TwosUnlimited
 {
@@ -52,10 +53,7 @@ namespace WP8TwosUnlimited
                     viewBox.Height = GameControl.TileSize + 0.3 * (0.5 - Math.Abs(progress - 0.5)) * GameControl.TileSize;
                 }
 
-                textBlock.Text = nextValue.ToString();
-
-                Canvas.SetTop(this, nextTop);
-                Canvas.SetLeft(this, nextLeft);
+                takeNextValues();
 
                 step++;
             }
@@ -64,10 +62,7 @@ namespace WP8TwosUnlimited
                 viewBox.Width = GameControl.TileSize;
                 viewBox.Height = GameControl.TileSize;
 
-                textBlock.Text = nextValue.ToString();
-
-                Canvas.SetTop(this, nextTop);
-                Canvas.SetLeft(this, nextLeft);
+                takeNextValues();
             }
         }
 
@@ -90,6 +85,72 @@ namespace WP8TwosUnlimited
             }
 
             step = 0;
+        }
+
+        private void takeNextValues()
+        {
+            Canvas.SetTop(this, nextTop);
+            Canvas.SetLeft(this, nextLeft);
+
+            Color foregroundColor;
+            Color backgroundColor;
+
+            switch (nextValue)
+            {
+                case 2:
+                    foregroundColor = Color.FromArgb(255, 119, 110, 101);
+                    backgroundColor = Color.FromArgb(255, 238, 228, 218);
+                    break;
+                case 4:
+                    foregroundColor = Color.FromArgb(255, 119, 110, 101);
+                    backgroundColor = Color.FromArgb(255, 237, 224, 200);
+                    break;
+                case 8:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 242, 177, 121);
+                    break;
+                case 16:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 245, 149, 99);
+                    break;
+                case 32:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 246, 124, 95);
+                    break;
+                case 64:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 246, 94, 59);
+                    break;
+                case 128:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 237, 207, 114);
+                    break;
+                case 256:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 237, 204, 97);
+                    break;
+                case 512:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 237, 200, 80);
+                    break;
+                case 1024:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 237, 197, 63);
+                    break;
+                case 2048:
+                    foregroundColor = Color.FromArgb(255, 249, 246, 242);
+                    backgroundColor = Color.FromArgb(255, 237, 194, 46);
+                    break;
+                default:
+                    foregroundColor = Color.FromArgb(255, 119, 110, 101);
+                    backgroundColor = Color.FromArgb(255, 60, 58, 50);
+                    break;
+            }
+
+            textBlock.Foreground = new SolidColorBrush(foregroundColor);
+            border.Background = new SolidColorBrush(backgroundColor);
+
+            textBlock.Text = nextValue.ToString();
         }
     }
 }

@@ -13,10 +13,8 @@
              Width="0"
              Height="0">
         <Border Name="border"
-                Background="#eee4da"
                 CornerRadius="2">
             <TextBlock Name="textBlock"
-                       Foreground="#776e65"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center" />
         </Border>
