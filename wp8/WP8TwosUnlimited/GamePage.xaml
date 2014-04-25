@@ -9,18 +9,17 @@
     xmlns:local="clr-namespace:WP8TwosUnlimited"
     mc:Ignorable="d"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True"
     BackKeyPress="PhoneApplicationPage_BackKeyPress">
 
     <Border Background="#faf8ef">
         <StackPanel VerticalAlignment="Center"
-                    Width="440">
+                    Width="420">
             <Border Background="#faf8ef">
                 <local:GameControl Name="gameControl" />
             </Border>
 
             <local:LogoControl HorizontalAlignment="Center"
-                               Margin="0,60,0,0"/>
+                               Margin="0,30,0,0"/>
         </StackPanel>
     </Border>
 

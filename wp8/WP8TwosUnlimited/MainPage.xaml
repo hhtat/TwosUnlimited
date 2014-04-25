@@ -8,8 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:WP8TwosUnlimited"
     mc:Ignorable="d"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    SupportedOrientations="Portrait" Orientation="Portrait">
 
     <Border Background="#faf8ef">
         <Viewbox Width="380">
@@ -24,7 +23,9 @@
                             Click="newGameButton_Click"
                             FontSize="24"
                             Style="{StaticResource buttonStyle}" />
-                    <Button Content="Instructions"
+                    <Button Name="instructionsButton"
+                            Content="Instructions"
+                            Click="instructionsButton_Click"
                             FontSize="24"
                             Style="{StaticResource buttonStyle}" />
                 </StackPanel>
