@@ -15,6 +15,7 @@
         <Border Name="border"
                 CornerRadius="2">
             <TextBlock Name="textBlock"
+                       FontWeight="Bold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center" />
         </Border>

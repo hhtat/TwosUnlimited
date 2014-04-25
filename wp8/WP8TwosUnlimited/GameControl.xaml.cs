@@ -10,8 +10,8 @@ namespace WP8TwosUnlimited
 {
     public partial class GameControl : UserControl
     {
-        public static readonly int TileSize = 40;
-        public static readonly int TilePadding = 8;
+        public static readonly int TileSize = 55;
+        public static readonly int TilePadding = 11;
         public static readonly int AnimationStepsA = 6;
         public static readonly int AnimationStepsB = 6;
         public static readonly int SwipeDelta = 10;
@@ -22,6 +22,8 @@ namespace WP8TwosUnlimited
         private Dictionary<GameTile, GameTileControl> oldTileControls;
 
         private DispatcherTimer timer;
+
+        public bool GameOver { get; private set; }
 
         public GameControl()
         {
@@ -53,7 +55,9 @@ namespace WP8TwosUnlimited
         {
             IDictionary<GameTile, GameTileState> oldTileStates;
 
-            gameState = GameLogic.Step(gameState, move, out oldTileStates);
+            gameState = GameLogic.Move(gameState, move, out oldTileStates);
+
+            GameOver = !GameLogic.CanMove(gameState);
 
             update(gameState, oldTileStates);
         }
@@ -134,20 +138,33 @@ namespace WP8TwosUnlimited
             {
                 tileControl.Animate();
             }
+
+            if (GameOver)
+            {
+                if (gameOverUI.Opacity < 0.73)
+                {
+                    gameOverUI.Opacity += 0.01;
+                }
+
+                gameOverUI.Visibility = Visibility.Visible;
+            }
         }
 
         private void UserControl_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
-            double x = e.TotalManipulation.Translation.X;
-            double y = e.TotalManipulation.Translation.Y;
+            if (!GameOver)
+            {
+                double x = e.TotalManipulation.Translation.X;
+                double y = e.TotalManipulation.Translation.Y;
 
-            if (Math.Abs(y) > Math.Abs(x) && Math.Abs(y) > SwipeDelta)
-            {
-                move(y < 0.0 ? GameMove.Up : GameMove.Down);
-            }
-            else if (Math.Abs(x) > SwipeDelta)
-            {
-                move(x < 0.0 ? GameMove.Left : GameMove.Right);
+                if (Math.Abs(y) > Math.Abs(x) && Math.Abs(y) > SwipeDelta)
+                {
+                    move(y < 0.0 ? GameMove.Up : GameMove.Down);
+                }
+                else if (Math.Abs(x) > SwipeDelta)
+                {
+                    move(x < 0.0 ? GameMove.Left : GameMove.Right);
+                }
             }
         }
     }

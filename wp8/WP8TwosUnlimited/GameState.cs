@@ -41,5 +41,28 @@ namespace WP8TwosUnlimited
         {
             return GetEnumerator();
         }
+
+        public bool Equals(GameState state)
+        {
+            if (size != state.size)
+            {
+                return false;
+            }
+
+            if (tileStates.Count != state.tileStates.Count)
+            {
+                return false;
+            }
+
+            foreach (GameTile tile in tileStates.Keys)
+            {
+                if (!state.tileStates.ContainsKey(tile) || !tileStates[tile].Equals(state.tileStates[tile]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

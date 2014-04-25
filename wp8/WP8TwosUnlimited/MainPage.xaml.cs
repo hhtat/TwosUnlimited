@@ -1,5 +1,5 @@
 ﻿using Microsoft.Phone.Controls;
-using System.Collections.Generic;
+using System;
 using System.Windows;
 
 namespace WP8TwosUnlimited
@@ -9,6 +9,11 @@ namespace WP8TwosUnlimited
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void newGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/" + typeof(GamePage).Name + ".xaml", UriKind.Relative));
         }
     }
 }

@@ -72,17 +72,10 @@ namespace WP8TwosUnlimited
             lastTop = nextTop;
             lastLeft = nextLeft;
 
-            if (state == null)
-            {
-                nextValue = 0;
-            }
-            else
-            {
-                nextValue = state.GetValue();
+            nextValue = state.GetValue();
 
-                nextTop = (GameControl.TileSize + GameControl.TilePadding) * state.GetRow();
-                nextLeft = (GameControl.TileSize + GameControl.TilePadding) * state.GetColumn();
-            }
+            nextTop = (GameControl.TileSize + GameControl.TilePadding) * state.GetRow();
+            nextLeft = (GameControl.TileSize + GameControl.TilePadding) * state.GetColumn();
 
             step = 0;
         }

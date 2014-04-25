@@ -35,5 +35,12 @@ namespace WP8TwosUnlimited
         {
             return column;
         }
+
+        public bool Equals(GameTileState state)
+        {
+            return power == state.power &&
+                row == state.row &&
+                column == state.column;
+        }
     }
 }

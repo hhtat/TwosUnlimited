@@ -5,16 +5,40 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
 
-    <!--Application Resources-->
     <Application.Resources>
-        <local:LocalizedStrings xmlns:local="clr-namespace:WP8TwosUnlimited" x:Key="LocalizedStrings"/>
+        <local:LocalizedStrings xmlns:local="clr-namespace:WP8TwosUnlimited" x:Key="LocalizedStrings" />
+
+        <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#8f7a66" />
+            <Setter Property="Foreground" Value="#f9f6f2" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Padding" Value="0,10" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border CornerRadius="3" Background="{TemplateBinding Background}">
+                                <ContentControl x:Name="ContentContainer"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                Padding="{TemplateBinding Padding}"
+                                                Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
-        <!--Required object that handles lifetime events for the application-->
-        <shell:PhoneApplicationService
-            Launching="Application_Launching" Closing="Application_Closing"
-            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+        <shell:PhoneApplicationService Launching="Application_Launching"
+                                       Closing="Application_Closing"
+                                       Activated="Application_Activated"
+                                       Deactivated="Application_Deactivated" />
     </Application.ApplicationLifetimeObjects>
 
 </Application>

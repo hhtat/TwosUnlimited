@@ -98,6 +98,9 @@
     </Compile>
     <Compile Include="GameLogic.cs" />
     <Compile Include="GameMove.cs" />
+    <Compile Include="GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameState.cs" />
     <Compile Include="GameTile.cs" />
     <Compile Include="GameTileControl.xaml.cs">
@@ -105,6 +108,9 @@
     </Compile>
     <Compile Include="GameTileState.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="LogoControl.xaml.cs">
+      <DependentUpon>LogoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -124,7 +130,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameTileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,7 +16,7 @@ namespace WP8TwosUnlimited
             return GetGameState(board);
         }
 
-        public static GameState Step(GameState state, GameMove move, out IDictionary<GameTile, GameTileState> oldTileStates)
+        public static GameState Move(GameState state, GameMove move, out IDictionary<GameTile, GameTileState> oldTileStates)
         {
             PoweredTile[,] board = GetBoard(state);
 
@@ -38,7 +38,7 @@ namespace WP8TwosUnlimited
 
             if (newHighestPower != highestPower)
             {
-                if (Checkpoint(newHighestPower))
+                if (IsCheckpoint(newHighestPower))
                 {
                     board = Promote(board);
                 }
@@ -55,6 +55,16 @@ namespace WP8TwosUnlimited
             }
 
             return GetGameState(board);
+        }
+
+        public static bool CanMove(GameState state)
+        {
+            IDictionary<GameTile, GameTileState> oldTileStates;
+
+            return !Move(state, GameMove.Up, out oldTileStates).Equals(state) ||
+                !Move(state, GameMove.Right, out oldTileStates).Equals(state) ||
+                !Move(state, GameMove.Down, out oldTileStates).Equals(state) ||
+                !Move(state, GameMove.Left, out oldTileStates).Equals(state);
         }
 
         private static int GetHighestPower(PoweredTile[,] board)
@@ -221,7 +231,7 @@ namespace WP8TwosUnlimited
             }
         }
 
-        private static bool Checkpoint(int power)
+        private static bool IsCheckpoint(int power)
         {
             switch (power)
             {

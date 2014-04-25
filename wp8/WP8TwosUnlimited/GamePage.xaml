@@ -1,0 +1,27 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WP8TwosUnlimited.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WP8TwosUnlimited"
+    mc:Ignorable="d"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    BackKeyPress="PhoneApplicationPage_BackKeyPress">
+
+    <Border Background="#faf8ef">
+        <StackPanel VerticalAlignment="Center"
+                    Width="440">
+            <Border Background="#faf8ef">
+                <local:GameControl Name="gameControl" />
+            </Border>
+
+            <local:LogoControl HorizontalAlignment="Center"
+                               Margin="0,60,0,0"/>
+        </StackPanel>
+    </Border>
+
+</phone:PhoneApplicationPage>
