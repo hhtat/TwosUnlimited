@@ -8,7 +8,6 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480"
-    ManipulationCompleted="UserControl_ManipulationCompleted"
     Loaded="UserControl_Loaded"
     Unloaded="UserControl_Unloaded">
 
@@ -19,17 +18,27 @@
             </Border>
         </Viewbox>
 
-        <Border Name="gameOverUI"
-                Background="#eee4da"
-                Opacity="0.0"
-                Visibility="Collapsed">
-            <TextBlock Text="Game over!"
-                       FontWeight="Bold"
-                       FontSize="72"
-                       Foreground="#776e65"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center" />
-        </Border>
+        <Grid Name="gameOverUI">
+            <Rectangle Fill="#eee4da"
+                       Opacity="0.73" />
+
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Game over!"
+                           FontWeight="Bold"
+                           FontSize="72"
+                           Foreground="#776e65"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20" />
+
+                <Button Name="newGameButton"
+                            Content="Try Again"
+                            Click="newGameButton_Click"
+                            FontSize="24"
+                            Width="200"
+                            Style="{StaticResource buttonStyle}" />
+            </StackPanel>
+        </Grid>
     </Grid>
 
 </UserControl>

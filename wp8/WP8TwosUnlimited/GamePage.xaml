@@ -9,6 +9,7 @@
     xmlns:local="clr-namespace:WP8TwosUnlimited"
     mc:Ignorable="d"
     SupportedOrientations="Portrait" Orientation="Portrait"
+    ManipulationCompleted="PhoneApplicationPage_ManipulationCompleted"
     BackKeyPress="PhoneApplicationPage_BackKeyPress">
 
     <Border Background="#faf8ef">

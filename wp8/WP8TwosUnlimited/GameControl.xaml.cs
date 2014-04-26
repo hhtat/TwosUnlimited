@@ -14,7 +14,8 @@ namespace WP8TwosUnlimited
         public static readonly int TilePadding = 11;
         public static readonly int AnimationStepsA = 6;
         public static readonly int AnimationStepsB = 6;
-        public static readonly int SwipeDelta = 10;
+
+        public bool GameOver { get; private set; }
 
         private GameState gameState;
 
@@ -23,22 +24,31 @@ namespace WP8TwosUnlimited
 
         private DispatcherTimer timer;
 
-        public bool GameOver { get; private set; }
-
         public GameControl()
         {
             InitializeComponent();
 
-            gameState = GameLogic.Start();
+            newGame();
+        }
 
-            tileControls = new Dictionary<GameTile, GameTileControl>();
-            oldTileControls = new Dictionary<GameTile, GameTileControl>();
+        public void DoMove(GameMove move)
+        {
+            if (GameOver)
+            {
+                throw new InvalidOperationException();
+            }
+
+            IDictionary<GameTile, GameTileState> oldTileStates;
+
+            gameState = GameLogic.Move(gameState, move, out oldTileStates);
+
+            GameOver = !GameLogic.CanMove(gameState);
+
+            update(gameState, oldTileStates);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            update(gameState, new Dictionary<GameTile, GameTileState>());
-
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Tick += timer_Tick;
@@ -51,15 +61,19 @@ namespace WP8TwosUnlimited
             timer = null;
         }
 
-        private void move(GameMove move)
+        private void newGame()
         {
-            IDictionary<GameTile, GameTileState> oldTileStates;
+            GameOver = false;
 
-            gameState = GameLogic.Move(gameState, move, out oldTileStates);
+            gameState = GameLogic.Start();
 
-            GameOver = !GameLogic.CanMove(gameState);
+            tileControls = new Dictionary<GameTile, GameTileControl>();
+            oldTileControls = new Dictionary<GameTile, GameTileControl>();
 
-            update(gameState, oldTileStates);
+            update(gameState, new Dictionary<GameTile, GameTileState>());
+
+            gameOverUI.Visibility = Visibility.Collapsed;
+            gameOverUI.Opacity = 0.0;
         }
 
         private void update(GameState state, IDictionary<GameTile, GameTileState> oldTileStates)
@@ -141,7 +155,7 @@ namespace WP8TwosUnlimited
 
             if (GameOver)
             {
-                if (gameOverUI.Opacity < 0.73)
+                if (gameOverUI.Opacity < 1.0)
                 {
                     gameOverUI.Opacity += 0.01;
                 }
@@ -150,22 +164,9 @@ namespace WP8TwosUnlimited
             }
         }
 
-        private void UserControl_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
+        private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!GameOver)
-            {
-                double x = e.TotalManipulation.Translation.X;
-                double y = e.TotalManipulation.Translation.Y;
-
-                if (Math.Abs(y) > Math.Abs(x) && Math.Abs(y) > SwipeDelta)
-                {
-                    move(y < 0.0 ? GameMove.Up : GameMove.Down);
-                }
-                else if (Math.Abs(x) > SwipeDelta)
-                {
-                    move(x < 0.0 ? GameMove.Left : GameMove.Right);
-                }
-            }
+            newGame();
         }
     }
 }
