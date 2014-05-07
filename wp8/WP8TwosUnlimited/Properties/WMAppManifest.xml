@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{bf1e0dde-5ef3-4b81-b24f-866a05c959ae}" Title="2048 Plus!" RuntimeType="Silverlight" Version="1.2.0.0" Genre="apps.normal" Author="WP8TwosUnlimited author" Description="A twist on the infamously addictive puzzle game 2048." Publisher="WP8TwosUnlimited" PublisherID="{7ea49c46-25e7-47b9-bc3d-7420a1d56b45}">
+  <App xmlns="" ProductID="{bf1e0dde-5ef3-4b81-b24f-866a05c959ae}" Title="2048 Plus!" RuntimeType="Silverlight" Version="1.2.1.0" Genre="apps.normal" Author="WP8TwosUnlimited author" Description="A twist on the infamously addictive puzzle game 2048." Publisher="WP8TwosUnlimited" PublisherID="{7ea49c46-25e7-47b9-bc3d-7420a1d56b45}">
     <IconPath IsRelative="true" IsResource="false">Assets\logo_300x300.png</IconPath>
     <Capabilities>
     </Capabilities>
